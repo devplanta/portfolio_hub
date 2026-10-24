@@ -1,4 +1,4 @@
-/* Portfolio Hub - v1.0 */
+/* Portfolio Hub - v1.1 */
 :root {
   --bg: #f7f8fc;
   --surface: #ffffff;
@@ -117,7 +117,7 @@ a { color: var(--primary); }
 /* Cards das matérias */
 .grade {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
   gap: 22px;
   margin-top: 20px;
 }
@@ -182,4 +182,38 @@ a { color: var(--primary); }
 @media (max-width: 560px) {
   .topo ul { gap: 14px; font-size: 0.9rem; }
   .hero { padding: 60px 0 68px; }
+}
+
+/* Acessibilidade e adaptação a telas pequenas */
+:where(a, button):focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+.hero a:focus-visible, .rodape a:focus-visible { outline-color: #fff; }
+section[id], footer[id], main[id] { scroll-margin-top: 110px; }
+.pular-conteudo {
+  position: fixed;
+  top: 8px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: #fff;
+  color: var(--primary-dark);
+  border-radius: 8px;
+  transform: translateY(-160%);
+}
+.pular-conteudo:focus { transform: translateY(0); }
+.card { min-width: 0; }
+.card header { flex-wrap: wrap; }
+.materiais a { gap: 12px; overflow-wrap: anywhere; }
+.materiais a span { flex-shrink: 0; }
+@media (max-width: 420px) {
+  .topo nav { flex-wrap: wrap; gap: 10px; }
+  .topo ul { flex-wrap: wrap; gap: 12px; }
+  .card { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .botao, .materiais a { transition: none; }
+  .botao:hover { transform: none; }
 }
